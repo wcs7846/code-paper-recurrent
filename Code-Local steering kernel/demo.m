@@ -41,7 +41,7 @@ for nrow = 1:row
             temp_gradient_y = gy(1+tt*s:(tt+1)*s, 1+tp*s:(tp+1)*s);
             % calculate the LSK of the patch
             % Tips: LSK must be greater than 0
-            temp_lsk = LSK(coordinate, temp_gradient_x, temp_gradient_y);
+            temp_lsk = LSK(coordinate, s, s, temp_gradient_x, temp_gradient_y);
             var = std(temp_lsk(:)); mean_v = mean(temp_lsk(:));
             if  var > eps
                 temp_lsk_norm = normalise(temp_lsk, mean_v, var);

@@ -1,4 +1,4 @@
-function [ output_lsk ] = LSK( coordinate, gradient_x, gradient_y )
+function [ output_lsk ] = LSK( coordinate, row, col, gradient_x, gradient_y )
 % LSK: local steering kernel algorithm
 % reference: Robust infrared small target detection using local steering kernel reconstruction
 % Copyright:2018-9-3 MarkLHF, UESTC.(e-mail:2751867750@qq.com)
@@ -6,6 +6,8 @@ function [ output_lsk ] = LSK( coordinate, gradient_x, gradient_y )
  detail
  model: please refer the orginal article.
  Input:  coordinate --> the coordinate matrix of Image
+         row        --> the rows of Image
+         col        --> the cols of Image
          gradient_x --> the gradient matrix of patch(x axis)
          gradient_y --> the gradient matrix of patch(y axis)
  Output: output_lsk --> the LSK of patch
@@ -16,7 +18,7 @@ function [ output_lsk ] = LSK( coordinate, gradient_x, gradient_y )
 lamda1 = 1; lamda2 = 10^(-7); alf = 3; h = 0.2;
 [len,~] = size(coordinate)  ; s = sqrt(len);
 padding = (s-1)/2;
-K = zeros(s,s);
+K = zeros(row, col);
 % step 1:calculate the matrix G: the first derivatives along the horizontal and vertical axes
 Gx_vector = reshape(gradient_x, [], 1);
 Gy_vector = reshape(gradient_y, [], 1);
