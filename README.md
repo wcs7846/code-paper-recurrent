@@ -5,9 +5,13 @@
 This is a folder to save some code to recurrent some algorithm in some papers.  
 Then I will introduce these algorithm:  
 1. **[MLHM]** = multiscale local homogeneity measure  
-[[REF] Nie J, Qu S, Wei Y, et al. An infrared small target detection method based on multiscale local homogeneity measure[J]. Infrared Physics & Technology, 2018, 90: 186-194.](https://www.sciencedirect.com/science/article/pii/S1350449517305078)
+[[REF] Nie J, Qu S, Wei Y, et al. An infrared small target detection method based on multiscale local homogeneity measure[J]. Infrared Physics & Technology, 2018, 90: 186-194.](https://www.sciencedirect.com/science/article/pii/S1350449517305078)  
 2. **[LSK]** = local steering kernel  
-[[REF] Li Y, Zhang Y. Robust infrared small target detection using local steering kernel reconstruction[J]. Pattern Recognition, 2018, 77: 113-125.](https://www.sciencedirect.com/science/article/abs/pii/S0031320317304983)
+[[REF] Li Y, Zhang Y. Robust infrared small target detection using local steering kernel reconstruction[J]. Pattern Recognition, 2018, 77: 113-125.](https://www.sciencedirect.com/science/article/abs/pii/S0031320317304983)  
+3. **[Kernel Regression]** for image processing  
+[[REF] Takeda H, Farsiu S, Milanfar P. Kernel regression for image processing and reconstruction[J]. 2006](https://ieeexplore.ieee.org/document/4060955)  
+[[ToolBox] Kernel Regression-Based Image Processing ToolBox for MATLAB](http://alumni.soe.ucsc.edu/~htakeda/KernelToolBox.htm)  
+(Tips) If I can find the toolbox corresponding the paper, I will put the link on this page without rewrite the code.
 ## Purpose
 
 This is a storehouse to store some runnable codes about some algorithms.  
