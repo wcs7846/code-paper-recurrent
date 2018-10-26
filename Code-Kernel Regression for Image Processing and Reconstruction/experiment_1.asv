@@ -1,6 +1,6 @@
-%% This script is designed to implement the measure from the reference article.
-% reference: Robust infrared small target detection using local steering kernel reconstruction
-% Copyright:2018-9-4 MarkLHF, UESTC.(e-mail:2751867750@qq.com)
+%% This script is designed to show the shape of LSK 
+% or say 
+% Copyright:2018-10-24 MarkLHF, UESTC.(e-mail:2751867750@qq.com)
 clc;close all;clear;
 
 % [Tips]: This script is just used as a test platform to comfire my ideas.
