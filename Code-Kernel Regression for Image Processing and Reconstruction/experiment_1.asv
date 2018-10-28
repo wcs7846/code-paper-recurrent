@@ -7,7 +7,7 @@ clc;close all;clear;
 %         and I won't write enough comment to explain these operation
 addpath('D:\Matlab_program\self-code\test-data');
 addpath('.\support\')
-Img = imread('lena.png');
+Img = imread('0001.bmp');
 figure;imshow(Img);title('test image');
 % transform rgb to gray
 [row, col, channel] = size(Img);
@@ -23,7 +23,6 @@ lambda = 1;  % the regularization for the elongation parameter
 alpha = 0.5; % the structure sensitive parameter
 h = 2.4;     % the global smoothing parameter
 ksize = 11;  % the kernel size
-r = 1;       % the upscaling factor
 z = zeros(row, col, IT+1);
 zx1 = zeros(row, col, IT+1);
 zx2 = zeros(row, col, IT+1);
@@ -43,7 +42,7 @@ for i = 2 : IT+1
     zx1(:,:,i) = zx1s;
     zx2(:,:,i) = zx2s;  
     % display the No.iteration
-    fprintf('[%d]Iteration\n',i);
+    fprintf('[%d]Iteration',i);
     %figure(99); imagesc(zs); colormap(gray); axis image; pause(1);
 end
 % 
@@ -52,12 +51,10 @@ H12 = zeros(row, col);
 H22 = zeros(row, col);
 for nrow = 1:row
     for ncol = 1:col
-        H11(nrow, ncol) = C(1,1,nrow,ncol);
-        H12(nrow, ncol) = C(1,2,nrow,ncol);
-        H22(nrow, ncol) = C(2,2,nrow,ncol);
+        H11()
     end
 end
 
 % show
-figure; imagesc(Img); colormap(gray); axis image; title('The noisy image, STD=25');
-figure; mesh(H11); title('H(1,1)');
+figure; imagesc(Img); colormap(gray); axis image;
+title('The noisy image, STD=25');
