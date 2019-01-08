@@ -42,8 +42,7 @@ coeff = sqrt(det(C))/(h^2); % coeff = coefficient of K
 for n = 1:len
     tmp = double(coordinate(n,:))*C*double(coordinate(n,:))';
     tmp_K = exp(tmp/(-2*h*h));
-    % fill the value of K into matrix K: pVector(n,:) is nth
-    % point's coordinates
+    % fill the value of K into matrix K: pVector(n,:) is nth point's coordinates
     K(coordinate(n,1)+padding+1,coordinate(n,2)+padding+1) = coeff*tmp_K;
 end
 % step 4:output the result
