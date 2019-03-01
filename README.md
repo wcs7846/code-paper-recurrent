@@ -12,6 +12,8 @@ Then I will introduce these algorithm:
 [[REF] Takeda H, Farsiu S, Milanfar P. Kernel regression for image processing and reconstruction[J]. 2006](https://ieeexplore.ieee.org/document/4060955)  
 [[ToolBox] Kernel Regression-Based Image Processing ToolBox for MATLAB](http://alumni.soe.ucsc.edu/~htakeda/KernelToolBox.htm)  
 (Tips) If I can find the toolbox corresponding the paper, I will put the link on this page without rewrite the code.
+4. **[Unsupervised ridge detection]** = second order anisotropic Gaussian kernels(AGK)   
+[[REF] Lopez-Molina C, De Ulzurrun G V D, Baetens J M, et al. Unsupervised ridge detection using second order anisotropic Gaussian kernels[J]. Signal Processing, 2015, 116: 55-67.](https://www.sciencedirect.com/science/article/pii/S0165168415001255)      
 ## Purpose
 
 This is a storehouse to store some runnable codes about some algorithms.  
