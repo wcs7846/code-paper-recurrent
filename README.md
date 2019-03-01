@@ -16,7 +16,7 @@ Then I will introduce these algorithm:
 >[[REF] Lopez-Molina C, De Ulzurrun G V D, Baetens J M, et al. Unsupervised ridge detection using second order anisotropic Gaussian kernels[J]. Signal Processing, 2015, 116: 55-67.](https://www.sciencedirect.com/science/article/pii/S0165168415001255)   
 5. **[Dual-Threshold Computation]** = Bowstring-Based Method for Adaptive Canny Edge Detector   
 >[[REF] Liu X, Yu Y, Liu B, et al. Bowstring-based dual-threshold computation method for adaptive Canny edge detector[C]//2013 28th International Conference on Image and Vision Computing New Zealand (IVCNZ 2013). IEEE, 2013: 13-18.](https://ieeexplore.ieee.org/document/6726985)   
-:exclamation:ATTENTION:exclamation: there is a defect in the implement, due to the inexplicit instruction about the procedure of the algorithm. So if you have some useful idea, welcome to contact me and discuss.    
+:exclamation::exclamation:ATTENTION:exclamation::exclamation: there is a defect in the implement, due to the inexplicit instruction about the procedure of the algorithm. So if you have some useful idea, welcome to contact me and discuss.    
 ## Purpose
 
 This is a storehouse to store some runnable codes about some algorithms.  
