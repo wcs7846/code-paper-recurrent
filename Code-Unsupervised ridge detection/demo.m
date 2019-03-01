@@ -88,8 +88,8 @@ end
 % and after
 Response_suppress = padarray(Response_suppress, [1, 1], 'replicate');
 gMag = padarray(gMag, [1, 1], 'replicate'); % gMag: the magnitude of gradient
-%% determing two threshold using the double threshold(by Liu etc.)
-% calculate two threshold by Liu method
+%% determing threshold using OTSU(the part is different than this paper)
+% but the result is same
 otsu_level = graythresh(gMag);
 
 %% applying hysteresis to generate the binary, thin map

@@ -52,6 +52,8 @@ lL = gmh(i_range)' - kL.*i_range;
 iL= find(lL == max(lL));
 iL = peakPoint + iL - 1;
 %% <5> refine the dual-threshold
+% I have some problem in this part, if you have some useful idea, welcome
+% to contact me and discuss.(my email on the top)
 K = length(gmh);
 % output the result
 upper_thres = iH/K*scale;
