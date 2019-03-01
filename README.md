@@ -13,7 +13,10 @@ Then I will introduce these algorithm:
 [[ToolBox] Kernel Regression-Based Image Processing ToolBox for MATLAB](http://alumni.soe.ucsc.edu/~htakeda/KernelToolBox.htm)  
 (Tips) If I can find the toolbox corresponding the paper, I will put the link on this page without rewrite the code.
 4. **[Unsupervised ridge detection]** = second order anisotropic Gaussian kernels(AGK)   
-[[REF] Lopez-Molina C, De Ulzurrun G V D, Baetens J M, et al. Unsupervised ridge detection using second order anisotropic Gaussian kernels[J]. Signal Processing, 2015, 116: 55-67.](https://www.sciencedirect.com/science/article/pii/S0165168415001255)      
+[[REF] Lopez-Molina C, De Ulzurrun G V D, Baetens J M, et al. Unsupervised ridge detection using second order anisotropic Gaussian kernels[J]. Signal Processing, 2015, 116: 55-67.](https://www.sciencedirect.com/science/article/pii/S0165168415001255)   
+5. **[Dual-Threshold Computation]** = Bowstring-Based Method for Adaptive Canny Edge Detector
+[[REF] Liu X, Yu Y, Liu B, et al. Bowstring-based dual-threshold computation method for adaptive Canny edge detector[C]//2013 28th International Conference on Image and Vision Computing New Zealand (IVCNZ 2013). IEEE, 2013: 13-18.](https://ieeexplore.ieee.org/document/6726985)   
+**[ATTENTION]** there is a defect in the implement, due to the inexplicit instruction about the procedure of the algorithm. So if you have some useful idea, welcome to contact me and discuss.    
 ## Purpose
 
 This is a storehouse to store some runnable codes about some algorithms.  
