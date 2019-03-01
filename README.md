@@ -24,7 +24,7 @@ I will upgrade the storehouse when I have some free time or have some new codes,
 
 ## Author
 
-Copyright:2018-9-4 MarkLHF, UESTC.(e-mail:2751867750@qq.com)  
+Copyright: 2018-9-4 MarkLHF, UESTC IDIPLab.(e-mail: 2751867750@qq.com)  
 [Tips] the algorithm codes in this folder are written by myself, but I will use some function from some toolbox. Thanks for predecessor!!
 
 ## Language
