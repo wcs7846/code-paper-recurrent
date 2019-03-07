@@ -29,8 +29,8 @@ D = im2double(D);
 % lambda =1/(sqrt(min(mm,nn)))*2;
 % mu=sqrt(2*max(mm,nn))*4;     % this value is related to the degree of noise
 
-SparseRatio = 0.05;
-E_true = zeros(size(D));
+% SparseRatio = 0.05;
+% E_true = zeros(size(D));
 % Eomega = randsample(mm*nn, round(mm*nn*SparseRatio));
 % E_true(Eomega) = rand(length(Eomega),1); % sparse component
 
@@ -39,7 +39,7 @@ E_true = zeros(size(D));
 %% Run VBRPCA
 tic
 % [X_hat, A_hat, B_hat, E_hat] = VBRPCA(D,options);
-
+[X_hat, E_hat] = arllr(D, 1, 1.5);
 toc
 
 %% reverse background and target image
@@ -65,7 +65,7 @@ Ar = cat(1, stats.Area);
 target = stats(find(Ar ==max(Ar))); %#ok<FNDSB>
 % show 
 pp = 10;
-figure;imshow(I,'border','tight');%title('detect result');%,'border','tight'
+figure;imshow(I)%,'border','tight');%title('detect result');%,'border','tight'
 for n = 1:length(target)
     pos = [(target(n).Centroid - pp/2) [pp pp]];
     rectangle('Position',1*pos,'EdgeColor','r');
