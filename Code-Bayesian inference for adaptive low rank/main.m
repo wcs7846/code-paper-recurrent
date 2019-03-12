@@ -7,7 +7,7 @@ detection = 0;
 addpath(genpath('D:\Matlab_program\reference\TFOCS'));
 %% IPI model
 % input test image
-ii = 3;
+ii = 30;
 I = imread(strcat(num2str((ii)),'.bmp'));
 [p, q, z]=size(I);
 
@@ -22,8 +22,9 @@ slideStep = 10;
 
 % patch model
 % I = im2double(I);
-D = gen_patch_img(I,patchSize, slideStep);
-D = im2double(D);
+I_double = im2double(I);
+D = gen_patch_img(I_double, patchSize, slideStep);
+
 
 [mm, nn]=size(D);
 % parameters setting
@@ -38,17 +39,18 @@ D = im2double(D);
 %% Run ARLLR
 tic
 % [X_hat_t, ~, ~, E_hat_t] = VBRPCA(D,options);
-[X_hat, E_hat] = arllr(D, 10^-4);
-% [X_hat, E_hat, list_e_norm] = arllre(D, 10, 1, I);
+% [X_hat, E_hat] = arllr(D, 10^-4);
+lamda = 1 / sqrt(max(p, q)); 
+[X_hat, E_hat, list_e_norm] = arllre(D, 100, 1, lamda);
 toc
 %% Reconstruct background and target image
-[rstT, rstB] = res_patch_img_mean(E_hat, X_hat, I, patchSize, slideStep);
+[rstT, rstB] = res_patch_img_mean(E_hat, X_hat, I_double, patchSize, slideStep);
 % Show the result
 figure;
 % Tips: the negative value is ignored
 subplot(121),imshow(rstT .* (rstT>0), []),title('Target');
 subplot(122),imshow(rstB .* (rstB>0), []),title('Background');
-% figure;mesh(corrupted);title('residual');
+figure;mesh(rstT);title('residual');
 % figure;plot(list_e_norm,'r.-');hold on;title('the norm of residual');
 %% Run toolbox TFOCS
 % Ref:http://cvxr.com/tfocs/
