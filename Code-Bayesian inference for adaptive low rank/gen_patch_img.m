@@ -1,40 +1,40 @@
 function patchImg = gen_patch_img(img, patchSize, slideStep)
-
-% 2017-03-25
+%% GEN_PATCH_IMG
 % This matlab code generates the patch-image for infrared 
 % patch-image model.
-%
-% Yimian Dai. Questions? yimian.dai@gmail.com
-% Copyright: College of Electronic and Information Engineering, 
-%            Nanjing University of Aeronautics and Astronautics
-
-
+% Copyright:2019-3-12 MarkLHF, UESTC.(e-mail:2751867750@qq.com)
+%                     Tianfang Zhang,  UESTC.(e-mail:sparkcarleton@gmail.com)
+%{
+ detail
+ Input:  img       --> the input image(2D, and uint8 type);
+         patchSize --> the size of patch(size = patchSize*patchSize)
+         slideStep --> the step of slide window
+ Output: patchImg  --> the patch image(2D, double)
+%}
 if ~exist('patchSize', 'var')
     patchSize = 50;
 end
-
 if ~exist('slideStep', 'var')
     slideStep = 10;
 end
 
 % img = reshape(1:9, [3 3])
 % img = reshape(1:12, [3 4])
-% patchSize = 2;
-% slideStep = 1;
-[imgHei, imgWid] = size(img);
 
-rowPatchNum = ceil((imgHei - patchSize) / slideStep) + 1;
-colPatchNum = ceil((imgWid - patchSize) / slideStep) + 1;
-rowPosArr = [1 : slideStep : (rowPatchNum - 1) * slideStep, imgHei - patchSize + 1];
-colPosArr = [1 : slideStep : (colPatchNum - 1) * slideStep, imgWid - patchSize + 1];
+[row, col] = size(img);
+D = zeros(patchSize*patchSize, (length(1:slideStep:row-patchSize)*length(1:slideStep:col-patchSize)));
+counter = 1;
 
 %% arrayfun version, identical to the following for-loop version
-[meshCols, meshRows] = meshgrid(colPosArr, rowPosArr);
-idx_fun = @(row,col) img(row : row + patchSize - 1, col : col + patchSize - 1);
-patchCell = arrayfun(idx_fun, meshRows, meshCols, 'UniformOutput', false);
-patchTen = cat(3, patchCell{:});
-patchImg = reshape(patchTen, [patchSize^2, length(patchTen)]);
-
+for i = 1:slideStep:row-patchSize
+    for j = 1:slideStep:col-patchSize
+        tmp_patch = img(i:i+patchSize-1, j:j+patchSize-1);
+        D(:, counter) = reshape(tmp_patch, patchSize*patchSize, 1);
+        counter = counter + 1;
+    end
+end
+%% output
+patchImg = D;
 %% for-loop version
 % patchImg = zeros(patchSize * patchSize, rowPatchNum * colPatchNum);
 % k = 0;
