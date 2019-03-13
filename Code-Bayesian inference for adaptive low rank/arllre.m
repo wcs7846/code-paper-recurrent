@@ -54,15 +54,47 @@ for k = 1:itera
     % get matrix of Z_E
     Z_E = input_args - newX + W./mu;
     % calculate the every singular by proximal operator algorithm
-    %     Z_E = abs(Z_E) + sita;
-    %     E = softThreshold(Z_E .* (Z_E>0), sita);
-%         lamda = 100000;  
+
+    % reconstruct;
+%     tao_e = 0.1;
+%     tao_e = tao_e/mu;
     
+    tt = 0.9*max(Z_E(:));
+    coeff_t = 0.5*tt^2/(log(abs(tt)/sita+1));
+    
+    % [Tips]:the coeff before the matrix E is very important
     t_ze = reshape(Z_E, [row*col, 1]);
-    t_E = proximal_log(t_ze .* (t_ze>0), tao/lamda, sita, 1); % tips: sig_E
-%     newE = softThreshold(Z_E .* (Z_E>0), lamda/mu);
-    % reconstruct
+    t_E = proximal_log(t_ze, coeff_t, sita, 1); % tips: sig_E
     newE = reshape(t_E, [row, col]);
+%     newE = softThreshold(Z_E .* (Z_E>0), lamda/mu);
+   
+    % the function can show the figure of objective function
+%     figure;
+%     if max(t_ze) > 0
+%         xmax = max(t_ze);
+%         xmin = 0;
+%     else
+%         xmax = 0;
+%         xmin = max(t_ze);
+%     end
+%     padding = (xmax - xmin)/10;
+%     xmin = xmin - padding;
+%     xmax = xmax + padding;
+%     ezplot(sprintf('%f*log(abs(x)+%f)+0.5*(%f-x)^2', tao/lamda, sita, max(t_ze)),[xmin, xmax]);hold on;
+%     title('the max(t_ze) of objective funtion');
+%     figure;
+%     if min(t_ze) > 0
+%         xmax = min(t_ze);
+%         xmin = 0;
+%     else
+%         xmax = 0;
+%         xmin = min(t_ze);
+%     end
+%     padding = (xmax - xmin)/10;
+%     xmin = xmin - padding;
+%     xmax = xmax + padding;
+%     ezplot(sprintf('%f*log(abs(x)+%f)+0.5*(%f-x)^2', tao_e, sita, min(t_ze)),[xmin, xmax]);hold on;
+%     title('the min(t_ze) of objective funtion');
     %% update the W matrix and mu
     newW = W + mu*(input_args - newX - newE);
     new_mu = 1.5*mu;

@@ -7,8 +7,9 @@ detection = 0;
 addpath(genpath('D:\Matlab_program\reference\TFOCS'));
 %% IPI model
 % input test image
-ii = 30;
-I = imread(strcat(num2str((ii)),'.bmp'));
+ii = 32;
+I = imread(strcat(num2str((ii)),'.jpg'));
+figure;imshow(I);
 [p, q, z]=size(I);
 
 % rgb2gray
@@ -50,7 +51,7 @@ figure;
 % Tips: the negative value is ignored
 subplot(121),imshow(rstT .* (rstT>0), []),title('Target');
 subplot(122),imshow(rstB .* (rstB>0), []),title('Background');
-figure;mesh(rstT);title('residual');
+figure;mesh(rstT.* (rstT>0));title('residual');
 % figure;plot(list_e_norm,'r.-');hold on;title('the norm of residual');
 %% Run toolbox TFOCS
 % Ref:http://cvxr.com/tfocs/
