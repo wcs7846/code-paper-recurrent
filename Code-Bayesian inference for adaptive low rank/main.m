@@ -1,6 +1,6 @@
 %% This script is designed to implement the method from the reference article.
 % reference: Bayesian inference for adaptive low rank and sparse matrix estimation
-% Author: MarkLHF £¨2751867750@qq.com£©
+% Author: MarkLHF (2751867750@qq.com)
 % Date: 2019/3/6
 close all;clear;
 detection = 0;
