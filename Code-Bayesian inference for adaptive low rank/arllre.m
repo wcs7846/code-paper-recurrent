@@ -54,13 +54,10 @@ for k = 1:itera
     % get matrix of Z_E
     Z_E = input_args - newX + W./mu;
     % calculate the every singular by proximal operator algorithm
-
-    % reconstruct;
-%     tao_e = 0.1;
-%     tao_e = tao_e/mu;
-    
     tt = 0.9*max(Z_E(:));
     coeff_t = 0.5*tt^2/(log(abs(tt)/sita+1));
+    % [ATTENTION] if you have some question about the 'coeff_t' parameter,
+    % please contract me to get more detail by the e-mail on the top.
     
     % [Tips]:the coeff before the matrix E is very important
     t_ze = reshape(Z_E, [row*col, 1]);
