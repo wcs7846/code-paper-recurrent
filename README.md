@@ -17,6 +17,8 @@ Then I will introduce these algorithm:
 5. **[Dual-Threshold Computation]** = Bowstring-Based Method for Adaptive Canny Edge Detector   
 >[[REF] Liu X, Yu Y, Liu B, et al. Bowstring-based dual-threshold computation method for adaptive Canny edge detector[C]//2013 28th International Conference on Image and Vision Computing New Zealand (IVCNZ 2013). IEEE, 2013: 13-18.](https://ieeexplore.ieee.org/document/6726985)   
 :exclamation::exclamation:ATTENTION:exclamation::exclamation: there is a defect in the implement, due to the inexplicit instruction about the procedure of the algorithm. So if you have some useful idea, welcome to contact me and discuss.    
+6. **[Bayesian inference for adaptive low rank]** = sparse and low-rank model solver by bayesian method and ADMM    
+>[[REF] Jia X, Feng X, Wang W, et al. Bayesian inference for adaptive low rank and sparse matrix estimation[J]. Neurocomputing, 2018, 291: 71-83.](https://www.sciencedirect.com/science/article/pii/S0925231218302030)     
 ## Purpose
 
 This is a storehouse to store some runnable codes about some algorithms.  
