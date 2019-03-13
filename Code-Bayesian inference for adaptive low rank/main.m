@@ -7,8 +7,8 @@ detection = 0;
 addpath(genpath('D:\Matlab_program\reference\TFOCS'));
 %% IPI model
 % input test image
-ii = 32;
-I = imread(strcat(num2str((ii)),'.jpg'));
+ii = 1;
+I = imread(strcat(num2str((ii)),'.bmp'));
 figure;imshow(I);
 [p, q, z]=size(I);
 
@@ -41,8 +41,7 @@ D = gen_patch_img(I_double, patchSize, slideStep);
 tic
 % [X_hat_t, ~, ~, E_hat_t] = VBRPCA(D,options);
 % [X_hat, E_hat] = arllr(D, 10^-4);
-lamda = 1 / sqrt(max(p, q)); 
-[X_hat, E_hat, list_e_norm] = arllre(D, 100, 1, lamda);
+[X_hat, E_hat, list_e_norm] = arllre(D, 100, 1);
 toc
 %% Reconstruct background and target image
 [rstT, rstB] = res_patch_img_mean(E_hat, X_hat, I_double, patchSize, slideStep);

@@ -1,11 +1,11 @@
-function [ output_X, output_E, list_e_norm ] = arllre( input_args, itera, show_debug, lamda)
+function [ output_X, output_E, list_e_norm ] = arllre( input_args, itera, show_debug)
 %% ARLLRE
 % reference: Unsupervised ridge detection using second order anisotropic Gaussian kernels
 % Copyright:2019-2-27 MarkLHF, UESTC.(e-mail:2751867750@qq.com)
 %{
  detail
  Input:  input_args --> the input image(2D, and double type);
-         itera      --> the number of iteration
+         itera      --> the number of iteration;
          show_debug --> the switch to show the debug information
  Output: output_X   --> the reconstruction(2D, double)
          output_E   --> the residual
@@ -69,6 +69,8 @@ for k = 1:itera
 %     newE = softThreshold(Z_E .* (Z_E>0), lamda/mu);
    
     % the function can show the figure of objective function
+    % [Tips] the part is just show the objective function, without other
+    % meaning.
 %     figure;
 %     if max(t_ze) > 0
 %         xmax = max(t_ze);
