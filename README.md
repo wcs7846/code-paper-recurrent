@@ -25,7 +25,7 @@ Then I will introduce these algorithm:
 6. **[Bayesian inference for adaptive low rank]** = sparse and low-rank model solver by bayesian method and ADMM    
 >[[REF] Jia X, Feng X, Wang W, et al. Bayesian inference for adaptive low rank and sparse matrix estimation[J]. Neurocomputing, 2018, 291: 71-83.](https://www.sciencedirect.com/science/article/pii/S0925231218302030)    
 
-7. **[Kernel regression]** = Accuracy Enhancement for Noninvasive Glucose Estimation    
+7. **[Kernel regression for non-invasive glucose detection]** = Accuracy Enhancement for Noninvasive Glucose Estimation    
 >[[REF] Pai P P, De A, Banerjee S. Accuracy Enhancement for Noninvasive Glucose Estimation Using Dual-Wavelength Photoacoustic Measurements and Kernel-Based Calibration[J]. Ieee Transactions on Instrumentation and Measurement, 2018, 67(1): 126-36](https://ieeexplore.ieee.org/document/8090535)   
 >(Tips) Using which kernel means the shape of the fitting function, for example: polynomial kernel == polynomial function(personal understanding)   
 
@@ -59,4 +59,5 @@ C++    (future)
 2018-10-24 added a link of toolobox, "Kernel Regression-Based Image Processing ToolBox for MATLAB".  
 2019-3-1 update "Unsupervised ridge detection" and "Dual-Threshold Computation" algorithm.     
 2019-3-13 update "Bayesian inference for adaptive low rank" algorithm.     
-2021-9-1 update "TK-main energy and blood glucose detection" project(including simulation and real test).
+2021-9-1 update "TK-main energy and blood glucose detection" project(including simulation and real test).     
+2021-9-1 update "Kernel regression for non-invasive glucose detection" algorithm.     
