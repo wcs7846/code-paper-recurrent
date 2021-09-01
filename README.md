@@ -44,5 +44,5 @@ C++    (future)
 2018-10-17 upgraded LSK and MLHM algorithm.  
 2018-10-24 added a link of toolobox, "Kernel Regression-Based Image Processing ToolBox for MATLAB".  
 2019-3-1 update "Unsupervised ridge detection" and "Dual-Threshold Computation" algorithm.     
-2019-3-13 update "Bayesian inference for adaptive low rank" algorithm.
+2019-3-13 update "Bayesian inference for adaptive low rank" algorithm.     
 2021-9-1 update "TK-main energy and blood glucose detection" project(including simulation and real test).
