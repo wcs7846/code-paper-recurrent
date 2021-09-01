@@ -19,7 +19,7 @@ Then I will introduce these algorithm:
 :exclamation::exclamation:ATTENTION:exclamation::exclamation: there is a defect in the implement, due to the inexplicit instruction about the procedure of the algorithm. So if you have some useful idea, welcome to contact me and discuss.    
 6. **[Bayesian inference for adaptive low rank]** = sparse and low-rank model solver by bayesian method and ADMM    
 >[[REF] Jia X, Feng X, Wang W, et al. Bayesian inference for adaptive low rank and sparse matrix estimation[J]. Neurocomputing, 2018, 291: 71-83.](https://www.sciencedirect.com/science/article/pii/S0925231218302030)    
-6. **[TK-main energy and blood glucose detection]** = Blood glucose detection based on Teager-Kaiser main energy of photoacoustic signal(Here is the author)  
+7. **[TK-main energy and blood glucose detection]** = Blood glucose detection based on Teager-Kaiser main energy of photoacoustic signal (Here is the author!!)  
 >[[REF] Long H, Chen B, Li W, Xian Y, Peng Z. Blood glucose detection based on Teager-Kaiser main energy of photoacoustic signal. Comput Biol Med. 2021 Jul;134:104552. doi: 10.1016/j.compbiomed.2021.104552. Epub 2021 Jun 8. PMID: 34144363.](https://pubmed.ncbi.nlm.nih.gov/34144363/)    
 >[ToolBox] [ValoMC toolbox](https://inverselight.github.io/ValoMC/) + [k-Wave toolbox](http://www.k-wave.org/documentation/k-wave.php)(For simulation)  
 >[[ToolBox] Time-Frequency Toolbox-For Use with Matlab](http://tftb.nongnu.org/)   
@@ -45,3 +45,4 @@ C++    (future)
 2018-10-24 added a link of toolobox, "Kernel Regression-Based Image Processing ToolBox for MATLAB".  
 2019-3-1 update "Unsupervised ridge detection" and "Dual-Threshold Computation" algorithm.     
 2019-3-13 update "Bayesian inference for adaptive low rank" algorithm.
+2021-9-1 update "TK-main energy and blood glucose detection" project(including simulation and real test).
