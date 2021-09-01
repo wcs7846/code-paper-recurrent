@@ -6,19 +6,28 @@ This is a folder to save some code to recurrent some algorithm in some papers.
 Then I will introduce these algorithm:  
 1. **[MLHM]** = multiscale local homogeneity measure  
 >[[REF] Nie J, Qu S, Wei Y, et al. An infrared small target detection method based on multiscale local homogeneity measure[J]. Infrared Physics & Technology, 2018, 90: 186-194.](https://www.sciencedirect.com/science/article/pii/S1350449517305078)  
+
 2. **[ALCM-LSK]** = adaptive local contrast measure - local steering kernel  
 >[[REF] Li Y, Zhang Y. Robust infrared small target detection using local steering kernel reconstruction[J]. Pattern Recognition, 2018, 77: 113-125.](https://www.sciencedirect.com/science/article/abs/pii/S0031320317304983)  
+
 3. **[Kernel Regression]** for image processing  
 >[[REF] Takeda H, Farsiu S, Milanfar P. Kernel regression for image processing and reconstruction[J]. 2006](https://ieeexplore.ieee.org/document/4060955)  
 >[[ToolBox] Kernel Regression-Based Image Processing ToolBox for MATLAB](http://alumni.soe.ucsc.edu/~htakeda/KernelToolBox.htm)  
-(Tips) If I can find the toolbox corresponding the paper, I will put the link on this page without rewrite the code.
+(Tips) If I can find the toolbox corresponding the paper, I will put the link on this page without rewrite the code.  
+
 4. **[Unsupervised ridge detection]** = second order anisotropic Gaussian kernels(AGK)   
 >[[REF] Lopez-Molina C, De Ulzurrun G V D, Baetens J M, et al. Unsupervised ridge detection using second order anisotropic Gaussian kernels[J]. Signal Processing, 2015, 116: 55-67.](https://www.sciencedirect.com/science/article/pii/S0165168415001255)   
+
 5. **[Dual-Threshold Computation]** = Bowstring-Based Method for Adaptive Canny Edge Detector   
 >[[REF] Liu X, Yu Y, Liu B, et al. Bowstring-based dual-threshold computation method for adaptive Canny edge detector[C]//2013 28th International Conference on Image and Vision Computing New Zealand (IVCNZ 2013). IEEE, 2013: 13-18.](https://ieeexplore.ieee.org/document/6726985)   
-:exclamation::exclamation:ATTENTION:exclamation::exclamation: there is a defect in the implement, due to the inexplicit instruction about the procedure of the algorithm. So if you have some useful idea, welcome to contact me and discuss.    
+>:exclamation::exclamation:ATTENTION:exclamation::exclamation: there is a defect in the implement, due to the inexplicit instruction about the procedure of the algorithm. So if you have some useful idea, welcome to contact me and discuss.    
+
 6. **[Bayesian inference for adaptive low rank]** = sparse and low-rank model solver by bayesian method and ADMM    
 >[[REF] Jia X, Feng X, Wang W, et al. Bayesian inference for adaptive low rank and sparse matrix estimation[J]. Neurocomputing, 2018, 291: 71-83.](https://www.sciencedirect.com/science/article/pii/S0925231218302030)    
+
+7. **[Kernel regression]** = Accuracy Enhancement for Noninvasive Glucose Estimation    
+>[[REF] Pai P P, De A, Banerjee S. Accuracy Enhancement for Noninvasive Glucose Estimation Using Dual-Wavelength Photoacoustic Measurements and Kernel-Based Calibration[J]. Ieee Transactions on Instrumentation and Measurement, 2018, 67(1): 126-36](https://ieeexplore.ieee.org/document/8090535)   
+>(Tips) Using which kernel means the shape of the fitting function, for example: polynomial kernel == polynomial function(personal understanding)   
 
 ## My paper - special issue
 
