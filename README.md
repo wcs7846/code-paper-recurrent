@@ -45,7 +45,7 @@ Then I will introduce these algorithm:
 >[Tips] LoadXXX_new(or tradition).m is the corresponding script used to load the dataset('new' means the new structure/ 'tradition' means the traditional structure)  
 
 3. **[WaveFeature and evidential regression for blood glucose detection]** = Evidential regression-based blood glucose detection using waveform features(Here is the author!!)  
->[[REF] Hongfeng, Long; Yang, Chunping; Li, Wei; Peng, Zhenming; Pu, Tian (2021): Evidential regression-based blood glucose detection using waveform features. TechRxiv. Preprint. https://doi.org/10.36227/techrxiv.17128457.v1(preprint) ]
+>[[REF] Hongfeng, Long; Yang, Chunping; Li, Wei; Peng, Zhenming; Pu, Tian (2021): Evidential regression-based blood glucose detection using waveform features. TechRxiv. Preprint. https://doi.org/10.36227/techrxiv.17128457.v1(preprint) ](https://www.techrxiv.org/articles/preprint/Evidential_regression-based_blood_glucose_detection_using_waveform_features/17128457)  
 >[Usage] Experiments C(using the proposed method): demo.m  
 >[Tips] The real data is saved in real-data.mat(The human finger’s photoacoustic signal)  
 >[Tips] The real data for Experiments B will be provided after this paper accepted   
