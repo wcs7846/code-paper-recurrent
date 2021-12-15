@@ -74,3 +74,4 @@ C++    (future)
 2021-9-1 update "TK-main energy and blood glucose detection" project(including simulation and real test).     
 2021-9-1 update "Kernel regression for non-invasive glucose detection" algorithm.     
 2021-10-18 update "A New Structure of the Focal Element in Object" algorithm and code.     
+2021-12-14 update "Evidential regression-based blood glucose detection using waveform features" algorithm and code.     
