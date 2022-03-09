@@ -117,7 +117,11 @@ timeFeature = [ppk, ppk_loc_pmax, ppk_loc_pmin];
 
 % feature_vec = [feature_vec, timeFeature];
 %% waveform features
-waveFeature = extractWaveFeature(data);
+[~, len] = size(data);
+meanValue = mean(data, 2);tmp_mat = repmat(meanValue, [1, len]);
+prepro_data = data - tmp_mat; % Y-direction shift to x-axis 
+
+waveFeature = extractWaveFeature(prepro_data);
 feature_vec = [feature_vec, waveFeature];
 %%
 % select tk as the data

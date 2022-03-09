@@ -16,12 +16,20 @@ Ft = Ft.*repmat(maxValue, [1, len])+repmat(meanValue, [1,len]);
 wn = zeros(NumSample, 1);
 options=optimset('fminbnd');func = @error_reg;
 for n = 1:NumSample
-    data = x(n,:);
-    wn_opt=fminbnd(func,0,1,options,1:len, data, Ft(n,:));
+    data = x(n,:); xrange = (0:len-1);
+    wn_opt=fminbnd(func, 0,1, options, xrange, data, Ft(n,:));
     wn(n) = wn_opt;
+    
+    
+    % show
+%     rho = 0.9;
+%     figure;plot(xrange, data, 'r-');hold on;
+%     [t2,y] = ode45(@(t,y)vdp1(t,y,wn_opt,rho,Ft(n,:)),[min(xrange) max(xrange)],[mean(data);0]);
+%     yi= interp1(t2,y,1:len,'spline');
+%     plot(xrange, yi(:,1), 'b-');hold on;
 end
 % Maximum overshoot
-Mp = (maxValue - meanValue)./meanValue;
+Mp = (maxValue - meanValue);
 % Adjustment time
 ts = 3./wn;
 
@@ -29,7 +37,7 @@ output_args = [wn, Mp, ts];
 end
 
 function err = error_reg(wn, t, testdata, Ft)
-rho = 1;len = length(testdata); meanValue = mean(testdata);
+rho = 0.9;len = length(testdata); meanValue = mean(testdata);
 
 [t2,y] = ode45(@(t,y)vdp1(t,y,wn,rho,Ft),[0 len-1],[meanValue;0]);
 yi= interp1(t2,y,t,'spline'); % 'method'是最邻近插值， 'linear'线性插值； 'spline'三次样条插值； 'cubic'立方插值
