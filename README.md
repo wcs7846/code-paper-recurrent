@@ -49,7 +49,7 @@ Then I will introduce these algorithm:
 >[Usage] Experiments C(using the proposed method): demo.m  
 >[ToolBox] [Evidential classification and regression (MATLAB)](https://www.hds.utc.fr/~tdenoeux/dokuwiki/en/software/tbm_reg)  
 >[Tips] The real data is saved in real-data.mat(The human finger’s photoacoustic signal)  
->[Tips] The real data for Experiments B will be provided after this paper accepted   
+>[Tips] The real data for Experiments B is saved in real-data2.mat(46 samples)
 
 ## Purpose
 
