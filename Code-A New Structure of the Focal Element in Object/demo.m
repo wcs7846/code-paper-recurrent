@@ -222,7 +222,7 @@ if debug_kfoldValidation
     [X_sorted, y_sorted] = randSortAndGroup(data(:,2:Num_Attr+1), data(:,1), 1:Num_class);
     
     disp("------------------------------------------------");
-    disp(sprintf("[k = %d] k fold validation", k));
+    fprintf("[k = %d] k fold validation\n", k);
     accuracy_vec = zeros(k, 1);
     for roundNumber = 1 : k
         % Select the vectors to use for training and cross validation.
@@ -272,11 +272,11 @@ if debug_kfoldValidation
         Num_error = numel(find(tt>0));
         
         accuracy_vec(roundNumber) = (Num_test - Num_error)/Num_test;
-        disp(sprintf("[roundNumber = %d]:finished",roundNumber));pause(0.05);
+        fprintf("[roundNumber = %d]:finished\n",roundNumber);pause(0.05);
     end
 %     disp(sprintf("Accuracy : %f(%d/%d); Error: %f(%d/%d);",(Num_test - Num_error)/Num_test, (Num_test - Num_error),Num_test, Num_error/Num_test, Num_error, Num_test));
     mean_accuracy = mean(accuracy_vec); var_accuracy = std(accuracy_vec);
-    disp(sprintf("[Accuracy] mean-value: %f, variance: %f", mean_accuracy, var_accuracy));
+    fprintf("[Accuracy] mean-value: %f, variance: %f\n", mean_accuracy, var_accuracy);
     return;
 end
 
