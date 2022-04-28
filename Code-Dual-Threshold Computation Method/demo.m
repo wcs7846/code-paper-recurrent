@@ -15,6 +15,6 @@ Img = im2double(Img);
 [ upper_thres, lower_thres ] = dualThreshold( Img, 1 );
 
 %% show the result(but I don't know how to use two threshold)
-disp(sprintf("the high-threshold is %f", upper_thres));
-disp(sprintf("the low-threshold is %f",  lower_thres));
+fprintf("the high-threshold is %f\n", upper_thres);
+fprintf("the low-threshold is %f\n",  lower_thres);
 
