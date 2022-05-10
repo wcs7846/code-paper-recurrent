@@ -89,4 +89,4 @@ C++    (future)
 2021-10-18 update "A New Structure of the Focal Element in Object" algorithm and code.  
 2021-12-14 update "Evidential regression-based blood glucose detection using waveform features" algorithm and code.  
 2022-4-26  update "Evidential regression-based blood glucose detection using waveform features", fix some bugs and reconstruct some functions.  
-2022-5-10  update Readme.md  
+2022-5-10  update fix the bug in the "Evidential regression-based blood glucose detection using waveform features".  
