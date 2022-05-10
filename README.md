@@ -4,48 +4,59 @@
 
 This is a folder to save some code to recurrent some algorithm in some papers.  
 Then I will introduce these algorithm:  
-1. **[MLHM]** = multiscale local homogeneity measure  
+
+- **[MLHM]** = multiscale local homogeneity measure  
+
 >[[REF] Nie J, Qu S, Wei Y, et al. An infrared small target detection method based on multiscale local homogeneity measure[J]. Infrared Physics & Technology, 2018, 90: 186-194.](https://www.sciencedirect.com/science/article/pii/S1350449517305078)  
 
-2. **[ALCM-LSK]** = adaptive local contrast measure - local steering kernel  
+- **[ALCM-LSK]** = adaptive local contrast measure - local steering kernel  
+
 >[[REF] Li Y, Zhang Y. Robust infrared small target detection using local steering kernel reconstruction[J]. Pattern Recognition, 2018, 77: 113-125.](https://www.sciencedirect.com/science/article/abs/pii/S0031320317304983)  
 
-3. **[Kernel Regression]** for image processing  
+- **[Kernel Regression]** for image processing  
+
 >[[REF] Takeda H, Farsiu S, Milanfar P. Kernel regression for image processing and reconstruction[J]. 2006](https://ieeexplore.ieee.org/document/4060955)  
 >[[ToolBox] Kernel Regression-Based Image Processing ToolBox for MATLAB](http://alumni.soe.ucsc.edu/~htakeda/KernelToolBox.htm)  
 (Tips) If I can find the toolbox corresponding the paper, I will put the link on this page without rewrite the code.  
 
-4. **[Unsupervised ridge detection]** = second order anisotropic Gaussian kernels(AGK)   
->[[REF] Lopez-Molina C, De Ulzurrun G V D, Baetens J M, et al. Unsupervised ridge detection using second order anisotropic Gaussian kernels[J]. Signal Processing, 2015, 116: 55-67.](https://www.sciencedirect.com/science/article/pii/S0165168415001255)   
+- **[Unsupervised ridge detection]** = second order anisotropic Gaussian kernels(AGK)
 
-5. **[Dual-Threshold Computation]** = Bowstring-Based Method for Adaptive Canny Edge Detector   
->[[REF] Liu X, Yu Y, Liu B, et al. Bowstring-based dual-threshold computation method for adaptive Canny edge detector[C]//2013 28th International Conference on Image and Vision Computing New Zealand (IVCNZ 2013). IEEE, 2013: 13-18.](https://ieeexplore.ieee.org/document/6726985)   
->:exclamation::exclamation:ATTENTION:exclamation::exclamation: there is a defect in the implement, due to the inexplicit instruction about the procedure of the algorithm. So if you have some useful idea, welcome to contact me and discuss.    
+>[[REF] Lopez-Molina C, De Ulzurrun G V D, Baetens J M, et al. Unsupervised ridge detection using second order anisotropic Gaussian kernels[J]. Signal Processing, 2015, 116: 55-67.](https://www.sciencedirect.com/science/article/pii/S0165168415001255)
 
-6. **[Bayesian inference for adaptive low rank]** = sparse and low-rank model solver by bayesian method and ADMM    
->[[REF] Jia X, Feng X, Wang W, et al. Bayesian inference for adaptive low rank and sparse matrix estimation[J]. Neurocomputing, 2018, 291: 71-83.](https://www.sciencedirect.com/science/article/pii/S0925231218302030)    
+- **[Dual-Threshold Computation]** = Bowstring-Based Method for Adaptive Canny Edge Detector
 
-7. **[Kernel regression for non-invasive glucose detection]** = Accuracy Enhancement for Noninvasive Glucose Estimation    
->[[REF] Pai P P, De A, Banerjee S. Accuracy Enhancement for Noninvasive Glucose Estimation Using Dual-Wavelength Photoacoustic Measurements and Kernel-Based Calibration[J]. Ieee Transactions on Instrumentation and Measurement, 2018, 67(1): 126-36](https://ieeexplore.ieee.org/document/8090535)   
->(Tips) Using which kernel means the shape of the fitting function, for example: polynomial kernel == polynomial function(personal understanding)   
+>[[REF] Liu X, Yu Y, Liu B, et al. Bowstring-based dual-threshold computation method for adaptive Canny edge detector[C]//2013 28th International Conference on Image and Vision Computing New Zealand (IVCNZ 2013). IEEE, 2013: 13-18.](https://ieeexplore.ieee.org/document/6726985)
+>:exclamation::exclamation:ATTENTION:exclamation::exclamation: there is a defect in the implement, due to the inexplicit instruction about the procedure of the algorithm. So if you have some useful idea, welcome to contact me and discuss.
+
+- **[Bayesian inference for adaptive low rank]** = sparse and low-rank model solver by bayesian method and ADMM
+
+>[[REF] Jia X, Feng X, Wang W, et al. Bayesian inference for adaptive low rank and sparse matrix estimation[J]. Neurocomputing, 2018, 291: 71-83.](https://www.sciencedirect.com/science/article/pii/S0925231218302030)
+
+- **[Kernel regression for non-invasive glucose detection]** = Accuracy Enhancement for Noninvasive Glucose Estimation
+
+>[[REF] Pai P P, De A, Banerjee S. Accuracy Enhancement for Noninvasive Glucose Estimation Using Dual-Wavelength Photoacoustic Measurements and Kernel-Based Calibration[J]. Ieee Transactions on Instrumentation and Measurement, 2018, 67(1): 126-36](https://ieeexplore.ieee.org/document/8090535)
+>(Tips) Using which kernel means the shape of the fitting function, for example: polynomial kernel == polynomial function(personal understanding)
 
 ## My paper - special issue
 
-1. **[TK-main energy and blood glucose detection]** = Blood glucose detection based on Teager-Kaiser main energy of photoacoustic signal (Here is the author!!)  
->[[REF] Long H, Chen B, Li W, Xian Y, Peng Z. Blood glucose detection based on Teager-Kaiser main energy of photoacoustic signal. Comput Biol Med. 2021 Jul;134:104552. doi: 10.1016/j.compbiomed.2021.104552. Epub 2021 Jun 8. PMID: 34144363.](https://pubmed.ncbi.nlm.nih.gov/34144363/)    
->[ToolBox] [ValoMC toolbox](https://inverselight.github.io/ValoMC/) + [k-Wave toolbox](http://www.k-wave.org/documentation/k-wave.php)(For simulation)  
->[ToolBox] [Time-Frequency Toolbox-For Use with Matlab](http://tftb.nongnu.org/)   
->(Tips) The real data is saved in real-data.mat / The simulated data should be generated by yourself(codes are provided).   
+- **[TK-main energy and blood glucose detection]** = Blood glucose detection based on Teager-Kaiser main energy of photoacoustic signal (Here is the author!!)  
 
-2. **[Evidence Theory]** = A New Structure of the Focal Element in Object (Here is the author!!)  
+>[[REF] Long H, Chen B, Li W, Xian Y, Peng Z. Blood glucose detection based on Teager-Kaiser main energy of photoacoustic signal. Comput Biol Med. 2021 Jul;134:104552. doi: 10.1016/j.compbiomed.2021.104552. Epub 2021 Jun 8. PMID: 34144363.](https://pubmed.ncbi.nlm.nih.gov/34144363/)
+>[ToolBox] [ValoMC toolbox](https://inverselight.github.io/ValoMC/) + [k-Wave toolbox](http://www.k-wave.org/documentation/k-wave.php)(For simulation)  
+>[ToolBox] [Time-Frequency Toolbox-For Use with Matlab](http://tftb.nongnu.org/)
+>(Tips) The real data is saved in real-data.mat / The simulated data should be generated by yourself(codes are provided).
+
+- **[Evidence Theory]** = A New Structure of the Focal Element in Object (Here is the author!!)  
+
 >[[REF] Long H, Peng Z, Deng Y. A new structure of the focal element in object recognition[J]. International Journal of Intelligent Systems, 2021.](https://onlinelibrary.wiley.com/doi/10.1002/int.22675)  
 >[Usage] Experiments 4.1(using pignistic probability transform to classify): demo_newStructure.m(using new structure)/demo_tradition.m(using traditional structure)  
 >[Usage] Experiments 4.2(using the proposed method): demo.m/ demo_classical.m(traditional methods for comparison--svm, REPtree, knn)  
 >[Usage] demo_iris.m is just a demo for debug(can see the internal debugging information through this script)  
 >[Tips] LoadXXX_new(or tradition).m is the corresponding script used to load the dataset('new' means the new structure/ 'tradition' means the traditional structure)  
 
-3. **[WaveFeature and evidential regression for blood glucose detection]** = Evidential regression-based blood glucose detection using waveform features(Here is the author!!)  
->[[REF] Hongfeng, Long; Yang, Chunping; Li, Wei; Peng, Zhenming; Pu, Tian (2021): Evidential regression-based blood glucose detection using waveform features. TechRxiv. Preprint.](https://doi.org/10.36227/techrxiv.17128457.v1) https://doi.org/10.36227/techrxiv.17128457.v1 (preprint)  
+- **[WaveFeature and evidential regression for blood glucose detection]** = Evidential regression-based blood glucose detection using waveform features(Here is the author!!)  
+
+>[[REF] Hongfeng, Long; Yang, Chunping; Li, Wei; Peng, Zhenming; Pu, Tian (2021): Evidential regression-based blood glucose detection using waveform features. TechRxiv. Preprint.](https://doi.org/10.36227/techrxiv.17128457.v1) <https://doi.org/10.36227/techrxiv.17128457.v1> (preprint)  
 >[Usage] Experiments C(using the proposed method): demo.m  
 >[ToolBox] [Evidential classification and regression (MATLAB)](https://www.hds.utc.fr/~tdenoeux/dokuwiki/en/software/tbm_reg)  
 >[Tips] The real data is saved in real-data.mat(The human finger’s photoacoustic signal)  
@@ -59,7 +70,7 @@ I will upgrade the storehouse when I have some free time or have some new codes,
 ## Author
 
 Copyright: 2018-9-4 MarkLHF, UESTC IDIPLab.(e-mail: 2751867750@qq.com)  
->[ORCID] [0000-0002-8201-5948](https://orcid.org/my-orcid?orcid=0000-0002-8201-5948)   
+>[ORCID] [0000-0002-8201-5948](https://orcid.org/my-orcid?orcid=0000-0002-8201-5948)
 >[Tips] the algorithm codes in this folder are written by myself, but I will use some function from some toolbox. Thanks for predecessor!!
 
 ## Language
@@ -68,12 +79,14 @@ MATLAB (currently)
 C++    (future)
 
 ## History
+
 2018-10-17 upgraded LSK and MLHM algorithm.  
 2018-10-24 added a link of toolobox, "Kernel Regression-Based Image Processing ToolBox for MATLAB".  
-2019-3-1   update "Unsupervised ridge detection" and "Dual-Threshold Computation" algorithm.     
-2019-3-13  update "Bayesian inference for adaptive low rank" algorithm.     
-2021-9-1   update "TK-main energy and blood glucose detection" project(including simulation and real test).     
-2021-9-1   update "Kernel regression for non-invasive glucose detection" algorithm.     
-2021-10-18 update "A New Structure of the Focal Element in Object" algorithm and code.     
-2021-12-14 update "Evidential regression-based blood glucose detection using waveform features" algorithm and code.     
-2022-4-26  update "Evidential regression-based blood glucose detection using waveform features", fix some bugs and reconstruct some functions.     
+2019-3-1   update "Unsupervised ridge detection" and "Dual-Threshold Computation" algorithm.
+2019-3-13  update "Bayesian inference for adaptive low rank" algorithm.
+2021-9-1   update "TK-main energy and blood glucose detection" project(including simulation and real test).
+2021-9-1   update "Kernel regression for non-invasive glucose detection" algorithm.
+2021-10-18 update "A New Structure of the Focal Element in Object" algorithm and code.
+2021-12-14 update "Evidential regression-based blood glucose detection using waveform features" algorithm and code.
+2022-4-26  update "Evidential regression-based blood glucose detection using waveform features", fix some bugs and reconstruct some functions.
+2022-5-10  update Readme.md
