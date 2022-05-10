@@ -12,15 +12,13 @@ debug_PropretyAnalysis = 0;
 debug_RegressionAnalysis = 1;
 debug_ConcentrationAnalysis = 0;
 
-% addpath('./lib');
-% addpath(genpath('./evaluation'));
-% load the sensor data
+addpath('./lib');
 switch_data = 'Long'; % chen or Long
 if strcmpi(switch_data, 'chen')% load the sensor data - chen
     load('real-data');
     concentration_list = tmp_con'/10;
 elseif strcmpi(switch_data, 'Long')% load the sensor data - Long
-    load('real-data2.mat'); % mg/dL
+    load('real-data_total.mat'); % mg/dL
     concentration_list = tmp_con;
 end
 
@@ -30,31 +28,25 @@ lineColor = lineColor(N:-1:1,:);
 % figure allocation
 if debug_PropretyAnalysis
     show_rd = figure; % real data figure;
+    show_feature1 = figure;
+    show_feature2 = figure;
+    show_feature3 = figure;
 end
 feature_vec= [];
 %% time-frequency features extraction
-tk_mat = []; rmsf_mat = []; ibw_mat = []; fag_mat = [];
+tk_mat = []; rmsf_mat = []; ibw_mat = []; fag_mat = []; loc_mat =[];
 for n = 1:N % each sample
     tmpdata = data(n,:);
     sample_rate = 50e6; % 50MHz
     
-    %% synthetic signal
-    SNB_value = 5;
-    power_signal = mean(tmpdata.^2); % average power
-    power_noise = power_signal*10^(-SNB_value/10);
-    power_noise_t = 10*log10(power_noise); % transform unit to dBw
-    noise = wgn(1, length(tmpdata), power_noise_t);
-    
-%     data(n,:) = tmpdata + noise;
-    
     xrange = (1:numel(data(n,:)))*1/sample_rate;
-    if debug_PropretyAnalysis
-        figure(show_rd);plot(xrange, data(n,:), 'color', lineColor(n, :));hold on;
-        title(strcat('the real blood glucose signal: ',num2str(concentration_list(n)),'mg/dL'));
-        xlabel('time/s');ylabel('pressure');
-        
-        label = [label, string(strcat(num2str(concentration_list(n)), ' mg/dL'))];
-    end
+    %     if debug_PropretyAnalysis
+    %         figure(show_rd);plot(xrange, data(n,:), 'color', lineColor(n, :));hold on;
+    %         title(strcat('the real blood glucose signal: ',num2str(concentration_list(n)),'mg/dL'));
+    %         xlabel('time/s');ylabel('pressure');
+    %
+    %         label = [label, string(strcat(num2str(concentration_list(n)), ' mg/dL'))];
+    %     end
     
     [tf_Stran, ts, fs] = st(data(n,:), 1);
     
@@ -82,8 +74,11 @@ for n = 1:N % each sample
     
     show_x = find(xrange > 000 & xrange < 5000 == 1) ;
     if debug_PropretyAnalysis
-        figure(show_feature3); plot(xrange(show_x), tk(show_x),   'color', lineColor(n, :)); hold on;
+        figure(show_feature1); plot(xrange(show_x), tk(show_x),   'color', lineColor(n, :)); hold on; ylabel('TK energy');
+        figure(show_feature2); plot(xrange(show_x), rmsf_mat(show_x),   'color', lineColor(n, :)); hold on; ylabel('RMSF energy');
+        figure(show_feature3); plot(xrange(show_x), ibw_mat(show_x),   'color', lineColor(n, :)); hold on; ylabel('IBW energy');
     end
+    loc_mat = [loc_mat; find(tk == max(tk))];
 end
 % time-frequency feature
 % calculate the optimal location
@@ -99,7 +94,7 @@ loc_rmsf = find(max(rmsf_coeff_vec) == rmsf_coeff_vec);
 loc_ibw = find(max(ibw_coeff_vec) == ibw_coeff_vec);
 % 使用时频特征作为特征向量
 tf_vec = [tk_mat(:, loc_tk), rmsf_mat(:, loc_rmsf), ibw_mat(:, loc_ibw)]; %
-feature_vec = [feature_vec tf_vec]; 
+feature_vec = [feature_vec tf_vec];
 if debug_ConcentrationAnalysis
     figure;plot(concentration_list, tk_mat(:, loc), 'ro');title('Teager Energy');hold on;
     xlabel('concentration(mg/dL)');ylabel('proprety value');%xlim([min(concentration_list),max(concentration_list)]);
@@ -134,22 +129,23 @@ timeFeature = [ppk, ppk_loc_pmax, ppk_loc_pmin];
 %% waveform features
 [~, len] = size(data);
 meanValue = mean(data, 2);tmp_mat = repmat(meanValue, [1, len]);
-prepro_data = data - tmp_mat; % Y-direction shift to x-axis 
+prepro_data = data - tmp_mat; % Y-direction shift to x-axis
 
 waveFeature = extractWaveFeature(prepro_data);
 feature_vec = [feature_vec, waveFeature];
-%%
-% 'Evidential', 'Linear', 'NeuralNet', 'SVR', 'RegTree'
-select_regression_alg = {'Evidential', 'NeuralNet', 'SVR', 'RegTree'};
+%% using regression algorithm to predict
+% 'Evidential', 'Linear', 'NeuralNet', 'SVR', 'RegTree', 'LS-SVR'
+select_regression_alg = {'Evidential', 'Linear', 'NeuralNet', 'SVR'};
 
-[~,N_feature] = size(feature_vec);N_div=10;
-L=floor(N/(N_feature+2)); div_vec = 1/L:((1-1/L)/(N_div-1)):1; % = [0.25, 0.5, 0.75, 1.0];
+[TotalNum,N_feature] = size(feature_vec);
+
+N_div=10;
+L=floor(N/(N_feature)); div_vec = 0.2:((1-0.2)/(N_div-1)):1; % = [0.25, 0.5, 0.75, 1.0];
 fit_mean_mat = zeros(length(select_regression_alg), N_div); fit_std_mat = zeros(length(select_regression_alg), N_div);
 fit_rmse_mat = zeros(length(select_regression_alg), N_div);
 show_Reg_mean = figure;     show_Reg_var = figure;
 for l = 1:N_div
     %% using fitnet to fitting the result
-    disp(sprintf("---[Prop:%f]---", div_vec(l)*100));
     % Repeat the experiment K times
     K = 10;
     %     vec_net = zeros(2, K); % [mean_value; std_value] for one time
@@ -161,6 +157,7 @@ for l = 1:N_div
     else
         torder = [ones(1, round(N*div_vec(l))), zeros(1, N-round(N*div_vec(l)))]; % select 1/l as test
     end
+    fprintf("---[Prop:%f]---[%d/%d]\n", div_vec(l)*100, sum(torder),N);
     randIndex = randperm(size(torder, 2));
     torder = torder(randIndex);
     
@@ -173,7 +170,7 @@ for l = 1:N_div
     if sum(strcmpi(select_regression_alg, 'Evidential')) == 1 % using evidental regression
         [vec_evid] = RegressionTest(feature_vec, concentration_list, torder, K, 'Evidential');
         fit_mean_evid = mean(vec_evid(1,:)); fit_std_evid = mean(vec_evid(2,:)); fit_rmse_evid = mean(vec_evid(3,:));
-        disp(sprintf("[evid-predict]  :mean_value %f; std_value %f; RMSE %f", fit_mean_evid, fit_std_evid, fit_rmse_evid));
+        fprintf("[evid-predict]  :mean_value %f; std_value %f; RMSE %f\n", fit_mean_evid, fit_std_evid, fit_rmse_evid);
         
         % for save
         Index_tmp = strcmpi(select_regression_alg, 'Evidential');
@@ -184,7 +181,7 @@ for l = 1:N_div
     if sum(strcmpi(select_regression_alg, 'NeuralNet')) == 1 % using Nerual network regression
         [vec_net]  = RegressionTest(feature_vec, concentration_list, torder, K, 'NeuralNet');
         fit_mean_net = mean(vec_net(1,:)); fit_std_net = mean(vec_net(2,:)); fit_rmse_net = mean(vec_net(3,:));
-        disp(sprintf("[net-predict]   :mean_value %f; std_value %f; RMSE %f", fit_mean_net, fit_std_net, fit_rmse_net));
+        fprintf("[net-predict]   :mean_value %f; std_value %f; RMSE %f\n", fit_mean_net, fit_std_net, fit_rmse_net);
         
         % for save
         Index_tmp = strcmpi(select_regression_alg, 'NeuralNet');
@@ -195,7 +192,7 @@ for l = 1:N_div
     if sum(strcmpi(select_regression_alg, 'Linear')) == 1 % using linear regression
         [vec_linear]  = RegressionTest(feature_vec, concentration_list, torder, K, 'Linear');
         fit_mean_linear = mean(vec_linear(1,:)); fit_std_linear = mean(vec_linear(2,:)); fit_rmse_linear = mean(vec_linear(3,:));
-        disp(sprintf("[linear-predict]:mean_value %f; std_value %f; RMSE %f", fit_mean_linear, fit_std_linear, fit_rmse_linear));
+        fprintf("[linear-predict]:mean_value %f; std_value %f; RMSE %f\n", fit_mean_linear, fit_std_linear, fit_rmse_linear);
         
         % for save
         Index_tmp = strcmpi(select_regression_alg, 'Linear');
@@ -206,7 +203,7 @@ for l = 1:N_div
     if sum(strcmpi(select_regression_alg, 'SVR')) == 1 % using SVR
         [vec_svr]  = RegressionTest(feature_vec, concentration_list, torder, K, 'SVR');
         fit_mean_svr = mean(vec_svr(1,:)); fit_std_svr = mean(vec_svr(2,:)); fit_rmse_svr = mean(vec_svr(3,:));
-        disp(sprintf("[SVR-predict]   :mean_value %f; std_value %f; RMSE %f", fit_mean_svr, fit_std_svr, fit_rmse_svr));
+        fprintf("[SVR-predict]   :mean_value %f; std_value %f; RMSE %f\n", fit_mean_svr, fit_std_svr, fit_rmse_svr);
         
         % for save
         Index_tmp = strcmpi(select_regression_alg, 'SVR');
@@ -217,14 +214,35 @@ for l = 1:N_div
     if sum(strcmpi(select_regression_alg, 'RegTree')) == 1 % using Regression Tree
         [vec_tree]  = RegressionTest(feature_vec, concentration_list, torder, K, 'RegTree');
         fit_mean_tree = mean(vec_tree(1,:)); fit_std_tree = mean(vec_tree(2,:)); fit_rmse_tree = mean(vec_tree(3,:));
-        disp(sprintf("[tree-predict]  :mean_value %f; std_value %f; RMSE %f", fit_mean_tree, fit_std_tree, fit_rmse_tree));
+        fprintf("[tree-predict]  :mean_value %f; std_value %f; RMSE %f\n", fit_mean_tree, fit_std_tree, fit_rmse_tree);
         
         % for save
         Index_tmp = strcmpi(select_regression_alg, 'RegTree');
         fit_mean_mat(Index_tmp,l) = fit_mean_tree;
         fit_std_mat(Index_tmp,l) = fit_std_tree;
-        fit_rmse_mat(Index_tmp,1) = fit_rmse_tree;
+        fit_rmse_mat(Index_tmp,1) = fit_rmse_tree;      
+    end
+    if sum(strcmpi(select_regression_alg, 'LS-SVR')) == 1 % using LS-SVR
+        [vec_lssvr]  = RegressionTest(feature_vec, concentration_list, torder, K, 'LS-SVR');
+        fit_mean_lssvr = mean(vec_lssvr(1,:)); fit_std_lssvr = mean(vec_lssvr(2,:)); fit_rmse_lssvr = mean(vec_lssvr(3,:));
+        fprintf("[LSSVR-predict]  :mean_value %f; std_value %f; RMSE %f\n", fit_mean_lssvr, fit_std_lssvr, fit_rmse_lssvr);
         
+        % for save
+        Index_tmp = strcmpi(select_regression_alg, 'LS-SVR');
+        fit_mean_mat(Index_tmp,l) = fit_mean_lssvr;
+        fit_std_mat(Index_tmp,l) = fit_std_lssvr;
+        fit_rmse_mat(Index_tmp,1) = fit_rmse_lssvr;      
+    end
+    if sum(strcmpi(select_regression_alg, 'CNN-net')) == 1 % using CNN-net
+        [vec_cnn]  = RegressionTest(feature_vec, concentration_list, torder, 1, 'CNN-net'); % only repeat 1 time
+        fit_mean_cnn = mean(vec_cnn(1,:)); fit_std_cnn = mean(vec_cnn(2,:)); fit_rmse_cnn = mean(vec_cnn(3,:));
+        fprintf("[LSSVR-predict]  :mean_value %f; std_value %f; RMSE %f\n", fit_mean_cnn, fit_std_cnn, fit_rmse_cnn);
+        
+        % for save
+        Index_tmp = strcmpi(select_regression_alg, 'CNN-net');
+        fit_mean_mat(Index_tmp,l) = fit_mean_cnn;
+        fit_std_mat(Index_tmp,l) = fit_std_cnn;
+        fit_rmse_mat(Index_tmp,1) = fit_rmse_cnn;
     end
     %% using kernel calibration
     %     [ vec_kernel ] = kernel_regression( feature_vec, concentration_list, torder, K );
@@ -259,8 +277,17 @@ if ~isempty(select_regression_alg) % check
     if sum(strcmpi(select_regression_alg, 'RegTree'))
         legend_label = [legend_label, {'RegTree'}];
         Index_tmp = strcmpi(select_regression_alg, 'RegTree');
-        plot(div_vec*100,fit_mean_mat(Index_tmp,:),'y-*', 'LineWidth', setLineWidth);hold on;
-        
+        plot(div_vec*100,fit_mean_mat(Index_tmp,:),'y-*', 'LineWidth', setLineWidth);hold on;        
+    end
+    if sum(strcmpi(select_regression_alg, 'LS-SVR'))
+        legend_label = [legend_label, {'LS-SVR'}];
+        Index_tmp = strcmpi(select_regression_alg, 'LS-SVR');
+        plot(div_vec*100,fit_mean_mat(Index_tmp,:),'m-*', 'LineWidth', setLineWidth);hold on;        
+    end
+    if sum(strcmpi(select_regression_alg, 'CNN-net'))
+        legend_label = [legend_label, {'CNN-net'}];
+        Index_tmp = strcmpi(select_regression_alg, 'CNN-net');
+        plot(div_vec*100,fit_mean_mat(Index_tmp,:),'r-*', 'LineWidth', setLineWidth);hold on;        
     end
     legend(legend_label);
     xlabel('train proportion(%)');ylabel('Mean value of error(mg/dL)');
@@ -291,8 +318,17 @@ if ~isempty(select_regression_alg) % check
     if sum(strcmpi(select_regression_alg, 'RegTree'))
         legend_label = [legend_label, {'RegTree'}];
         Index_tmp = strcmpi(select_regression_alg, 'RegTree');
-        plot(div_vec*100,fit_std_mat(Index_tmp,:),'y-*', 'LineWidth', setLineWidth);hold on;
-        
+        plot(div_vec*100,fit_std_mat(Index_tmp,:),'y-*', 'LineWidth', setLineWidth);hold on;        
+    end
+    if sum(strcmpi(select_regression_alg, 'LS-SVR'))
+        legend_label = [legend_label, {'LS-SVR'}];
+        Index_tmp = strcmpi(select_regression_alg, 'LS-SVR');
+        plot(div_vec*100,fit_std_mat(Index_tmp,:),'m-*', 'LineWidth', setLineWidth);hold on;        
+    end
+    if sum(strcmpi(select_regression_alg, 'CNN-net'))
+        legend_label = [legend_label, {'CNN-net'}];
+        Index_tmp = strcmpi(select_regression_alg, 'CNN-net');
+        plot(div_vec*100,fit_std_mat(Index_tmp,:),'r-*', 'LineWidth', setLineWidth);hold on;        
     end
     legend(legend_label);
     xlabel('train proportion(%)');ylabel('Variance of error(mg/dL)');
@@ -300,7 +336,10 @@ if ~isempty(select_regression_alg) % check
 end
 
 % make the data as the column
-fit_mean_mat = fit_mean_mat';fit_std_mat = fit_std_mat';xrange = div_vec'*100;
+fit_mean_mat = roundn(fit_mean_mat, 4); 
+fit_std_mat = roundn(fit_std_mat, 4);
+xrange = roundn(div_vec'*100,4);
+fit_mean_mat = fit_mean_mat';fit_std_mat = fit_std_mat';
 if  strcmpi(switch_data, 'chen')
     save('result_data_chen', 'xrange', 'fit_mean_mat', 'fit_std_mat','legend_label');
 elseif strcmpi(switch_data, 'Long' )

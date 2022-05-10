@@ -18,9 +18,7 @@ options=optimset('fminbnd');func = @error_reg;
 for n = 1:NumSample
     data = x(n,:); xrange = (0:len-1);
     wn_opt=fminbnd(func, 0,1, options, xrange, data, Ft(n,:));
-    wn(n) = wn_opt;
-    
-    
+    wn(n) = wn_opt;   
     % show
 %     rho = 0.9;
 %     figure;plot(xrange, data, 'r-');hold on;
