@@ -15,8 +15,8 @@ debug_ConcentrationAnalysis = 1;
 addpath('./lib');
 addpath(genpath('./evaluation'));
 % load the sensor data
-path = './simulate_result/acoustic/';
 concentration_list = 500:100:3000; concentration_list = concentration_list/10;
+N = length(concentration_list);
 SNB_list = [1:10:90]-1;
 % SNB_list = [ 1,  3,  5,  8, 10,...
 %             15, 20, 30, 50,]; % unit: dB
@@ -40,15 +40,13 @@ if debug_PropretyAnalysis
     show_feature2 = figure;
     show_feature3 = figure;
     show_feature4 = figure;
-    n = 26;
 end
 
-for n = length(concentration_list):-1:1
-    load(strcat(path, 'acoustic_skin_', num2str(concentration_list(n)*10), '.mat'));
-    
+load('acoustic_skin.mat')
+for n = 1:N
     [row, col] = size(sensor_data);
-    data = sensor_data(round(row/2),:);
-    dt = kgrid.dt; % the interval time == the reciprocal
+    data = sensor_data(n,:);
+    dt = 1.823708206686930e-09; % the interval time == the reciprocal
 %     average_v = 1200.0 * 1e6; % um/s
 %     d = dt*average_v; % 0.01 mm = 10 um
 
@@ -171,23 +169,23 @@ for n = length(concentration_list):-1:1
 end
 if debug_PropretyAnalysis
     figure(show_rd);
-    colorbar('Ticks',0:1/(length(concentration_list)-1):1,'TickLabels', fliplr(label));colormap(lineColor);    
+    colorbar('Ticks',0:1/(length(concentration_list)-1):1,'TickLabels', (label));colormap(lineColor);    
     
     figure(show_feature1);title('the root mean square frequence');
     xlabel(x_axis_label);ylabel('proprety value');xlim([min(xrange(show_x)),max(xrange(show_x))]);
-    colorbar('Ticks',0:1/(length(concentration_list)-1):1,'TickLabels', fliplr(label));colormap(lineColor);
+    colorbar('Ticks',0:1/(length(concentration_list)-1):1,'TickLabels', (label));colormap(lineColor);
     
     figure(show_feature2);title('instantaneous bandwidth');
     xlabel(x_axis_label);ylabel('proprety value');xlim([min(xrange(show_x)),max(xrange(show_x))]);
-    colorbar('Ticks',0:1/(length(concentration_list)-1):1,'TickLabels', fliplr(label));colormap(lineColor);
+    colorbar('Ticks',0:1/(length(concentration_list)-1):1,'TickLabels', (label));colormap(lineColor);
 
     figure(show_feature3);title('Teager Energy');
     xlabel(x_axis_label);ylabel('proprety value');xlim([min(xrange(show_x)),max(xrange(show_x))]);
-    colorbar('Ticks',0:1/(length(concentration_list)-1):1,'TickLabels', fliplr(label));colormap(lineColor);
+    colorbar('Ticks',0:1/(length(concentration_list)-1):1,'TickLabels', (label));colormap(lineColor);
 
     figure(show_feature4);title('Frequency attenuation gradient');
     xlabel(x_axis_label);ylabel('proprety value');xlim([min(xrange(show_x)),max(xrange(show_x))]);
-    colorbar('Ticks',0:1/(length(concentration_list)-1):1,'TickLabels', fliplr(label));colormap(lineColor);
+    colorbar('Ticks',0:1/(length(concentration_list)-1):1,'TickLabels', (label));colormap(lineColor);
 end
 
 %% special location analysis
@@ -202,7 +200,7 @@ if debug_ConcentrationAnalysis
 %     figure;plot(fliplr(concentration_list), dataset.ibw(:, loc), 'r+');title('instantaneous bandwidth');
 %     xlabel('concentration(mg/dL)');ylabel('proprety value');xlim([min(concentration_list),max(concentration_list)]);
     % Teager Energy == tk
-    figure;plot(fliplr(concentration_list), dataset.tk(:, loc), 'r+');title('Teager Energy');hold on;
+    figure;plot((concentration_list), dataset.tk(:, loc), 'r+');title('Teager Energy');hold on;
     xlabel('concentration(mg/dL)');ylabel('proprety value');xlim([min(concentration_list),max(concentration_list)]);
     % Frequency attenuation gradient == fag
 %     figure;plot(fliplr(concentration_list), dataset.fag(:, loc), 'r+');title('Frequency attenuation gradient');
@@ -216,7 +214,7 @@ end
 pp = loc;
 % select tk as the data
 data_select = (dataset.tk(:, loc)); % data_select = x; concentration_list = y
-data_select = data_select(length(data_select):-1:1);
+% data_select = data_select(length(data_select):-1:1);
 % normalize - tk attributes
 max_attr = max(data_select); min_attr = min(data_select);
 % data_select = (data_select - min_attr)/(max_attr - min_attr);
