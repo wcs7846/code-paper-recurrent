@@ -42,12 +42,13 @@ if debug_PropretyAnalysis
     n = 26;
 end
 
+load('acoustic_skin.mat')
 for n = length(concentration_list):-1:1
-    load(strcat(path, 'acoustic_skin_', num2str(concentration_list(n)*10), '.mat'));
+%     load(strcat(path, 'acoustic_skin_', num2str(concentration_list(n)*10), '.mat'));
     
     [row, col] = size(sensor_data);
-    data = sensor_data(round(row/2),:);
-    dt = kgrid.dt; % the interval time == the reciprocal
+    data = sensor_data(n,:);
+    dt = 1.823708206686930e-09; % the interval time == the reciprocal
 %     average_v = 1200.0 * 1e6; % um/s
 %     d = dt*average_v; % 0.01 mm = 10 um
 
