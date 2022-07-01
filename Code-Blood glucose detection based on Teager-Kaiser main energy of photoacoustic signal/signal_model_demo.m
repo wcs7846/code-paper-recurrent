@@ -17,12 +17,7 @@ addpath(genpath('./evaluation'));
 % load the sensor data
 concentration_list = 500:100:3000; concentration_list = concentration_list/10;
 N = length(concentration_list);
-SNB_list = [1:10:90]-1;
-% SNB_list = [ 1,  3,  5,  8, 10,...
-%             15, 20, 30, 50,]; % unit: dB
-SNB_select = 1; 
-%SNB_value = SNB_list(SNB_select);
-SNB_value = 15;
+SNR_value = 15; % unit: dB
 
 dataset.cf  = [];
 dataset.ibw = [];
@@ -81,7 +76,7 @@ for n = 1:N
 
     %% synthetic signal
     power_signal = mean(data.^2); % average power
-    power_noise = power_signal*10^(-SNB_value/10);
+    power_noise = power_signal*10^(-SNR_value/10);
     power_noise_t = 10*log10(power_noise); % transform unit to dBw
     noise = wgn(1, length(data), power_noise_t);
     
@@ -265,11 +260,11 @@ return;
 pp =  loc; % [1457,1500,1538]
 [error_train, error_train_r,...
  error_test, error_test_r] = test_regression(dataset, concentration_list, 'tk', 'linear', pp, debug_RegressionAnalysis);
-disp(strcat(sprintf('SNB = %f', SNB_value ),' dB'));
+disp(strcat(sprintf('SNB = %f', SNR_value ),' dB'));
 disp(sprintf('the average trainset error: %f[%f mg/dL]; the average testset error: %f[%f mg/dL];', ...
     error_train, error_train_r, ...
     error_test,  error_test_r));
 %
 path = 'D:\Áúºè·å\ÑÐ¾¿ÊÒ ¡ª ¡ª ÑªÌÇÏîÄ¿\signal_model\ÔëÉù·ÖÎö\';
-fp = strcat(path, 'SNB=', num2str(SNB_value) ,'dB', '.mat');
+fp = strcat(path, 'SNB=', num2str(SNR_value) ,'dB', '.mat');
 % save(fp, 'error_train_list', 'error_test_list', 'trainset', 'testset');
